@@ -1,3 +1,4 @@
+def registry = 'https://jenkins80.jfrog.io/'
 pipeline {
     agent {
         node{
@@ -44,7 +45,6 @@ environment {
   }
   }
   }
-   def registry = 'https://jenkins80.jfrog.io/'
          stage("Jar Publish") {
         steps {
             script {
