@@ -93,6 +93,14 @@ environment {
                echo '<--------------- Docker Publish Ended --------------->'  
             }
         }
-    }   
+    } 
+
+    stage("deployemnt stage kubernetes")  {
+        steps{
+            script{
+                sh './deploy.sh'
+            }
+        }
+    }
 }
 }
