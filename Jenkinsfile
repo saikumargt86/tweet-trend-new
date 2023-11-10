@@ -95,12 +95,14 @@ environment {
         }
     } 
 
-    stage("deployemnt stage kubernetes")  {
+    stage("install with helm")  {
         steps{
             script{
-                sh './deploy.sh'
+                sh 'helm install ttrend ttrent-0.1.0.tgz'
             }
         }
     }
+
+    
 }
 }
