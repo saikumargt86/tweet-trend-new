@@ -1,6 +1,6 @@
 def registry = 'https://jenkins80.jfrog.io/'
 def imageName = 'jenkins80.jfrog.io/doc-repo-docker-local/ttrend'
-def version   = '2.1.2'
+def version   = '2.1.3'
 pipeline {
     agent {
         node{
