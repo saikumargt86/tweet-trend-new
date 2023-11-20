@@ -95,13 +95,13 @@ environment {
         }
     } 
 
-    stage("install with helm")  {
-        steps{
-            script{
-                sh 'helm install ttrend ttrent-0.1.0.tgz'
-            }
-        }
-    }
+    //stage("install with helm")  {
+    //    steps{
+    //        script{
+    //            sh 'helm install ttrend ttrent-0.1.0.tgz'
+    //        }
+    //    }
+    //}
 
     
 }
