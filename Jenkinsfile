@@ -1,15 +1,20 @@
 def registry = 'https://jenkins80.jfrog.io/'
-def imageName = 'jenkins80.jfrog.io/doc-repo-docker-local/ttrend'
-def version   = '2.1.3'
 pipeline {
     agent {
         node{
             label 'maven-server'
         }
     }
-environment {
-    PATH = "/opt/apache-maven-3.9.5/bin:$PATH"
-}
+     parameters {
+        string defaultValue: '857600833350', description: 'Enter your AWS account ID', name: 'AWS_ACCOUNT_ID'
+        string defaultValue: 'ap-south-1', description: 'Enter your AWS account ID', name: 'AWS_DEFAULT_REGION'
+        string defaultValue: 'sample', description: 'Enter your AWS account ID', name: 'IMAGE_REPO_NAME'
+        string defaultValue: 'v1', description: 'Enter your AWS account ID', name: 'IMAGE_TAG'
+        }
+    environment {
+        PATH = "/opt/apache-maven-3.9.5/bin:$PATH"
+        REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
+        }
     stages {
         stage('build') {
             steps {
@@ -77,7 +82,7 @@ environment {
       steps {
         script {
            echo '<--------------- Docker Build Started --------------->'
-           app = docker.build(imageName+":"+version)
+            dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
            echo '<--------------- Docker Build Ends --------------->'
         }
       }
@@ -87,8 +92,8 @@ environment {
         steps {
             script {
                echo '<--------------- Docker Publish Started --------------->'  
-                docker.withRegistry(registry, 'jfrog-token'){
-                    app.push()
+                 sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"
+                sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"
                 }    
                echo '<--------------- Docker Publish Ended --------------->'  
             }
@@ -105,4 +110,8 @@ environment {
 
     
 }
-}
+
+
+
+
+
