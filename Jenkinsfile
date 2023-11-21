@@ -98,14 +98,14 @@ pipeline {
                echo '<--------------- Docker Publish Ended --------------->'  
             }
         }
-
+     }
         post{
           success{
               emailext body: 'Message from Jenkins', subject: 'Build Successful!', to: 't4ssietsai86@gmail.com'
           }
         }
           
-        }
+        
     } 
 
     //stage("install with helm")  {
