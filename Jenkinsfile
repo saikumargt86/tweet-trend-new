@@ -54,6 +54,7 @@ pipeline {
   }
          stage("Jar Publish") {
         steps {
+          catchError(buildResult: 'SUCCESS') {
             script {
                     echo '<--------------- Jar Publish Started --------------->'
                      def server = Artifactory.newServer url:registry+"/artifactory" ,  credentialsId:"jfrog-token"
@@ -75,6 +76,7 @@ pipeline {
                      echo '<--------------- Jar Publish Ended --------------->'  
             
             }
+          }
         }   
     }
 
