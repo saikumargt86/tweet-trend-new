@@ -1,5 +1,4 @@
 def registry = 'https://jenkins80.jfrog.io/'
-def fileName = "${IMAGE_REPO_NAME}${IMAGE_TAG}.txt"
 pipeline {
     agent {
         node{
@@ -15,6 +14,7 @@ pipeline {
     environment {
         PATH = "/opt/apache-maven-3.9.5/bin:$PATH"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
+        FILENAME = "${IMAGE_REPO_NAME}${IMAGE_TAG}.txt"
         }
     stages {
         stage('build') {
@@ -94,9 +94,9 @@ pipeline {
       stage("Trivy image scanning"){
           steps{
             script{
-              echo '<--------------- Docker Build Started --------------->'              
+              echo '<--------------- Trivy image scanning Started --------------->'              
               sh "trivy image ${IMAGE_REPO_NAME}:${IMAGE_TAG} > ${filename}"
-              echo '<--------------- Docker Build Ends --------------->'
+              echo '<--------------- Trivy image scanning Ends --------------->'
             }
             
           }
