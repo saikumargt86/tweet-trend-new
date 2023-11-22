@@ -88,6 +88,16 @@ pipeline {
       }
     }
 
+      stage("Trivy image scanning"){
+          steps{
+            script{
+              def fileName = "${IMAGE_REPO_NAME}${IMAGE_TAG}.txt"
+              sh "trivy image ${IMAGE_REPO_NAME}:${IMAGE_TAG} > ${filename}"
+            }
+            
+          }
+        }
+
             stage (" Docker Publish "){
         steps {
             script {
@@ -98,10 +108,12 @@ pipeline {
                echo '<--------------- Docker Publish Ended --------------->'  
             }
         }
+
+      
      }
         post{
           success{
-              emailext body: 'Message from Jenkins', subject: 'Build Successful!', to: 't4ssietsai86@gmail.com'
+              emailext attachLog: true, body: 'test message', subject: 'test message', to: 't4ssietsai86@gmail.com'
           }
         }
           
