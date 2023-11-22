@@ -1,4 +1,5 @@
 def registry = 'https://jenkins80.jfrog.io/'
+def fileName = "${IMAGE_REPO_NAME}${IMAGE_TAG}.txt"
 pipeline {
     agent {
         node{
@@ -93,8 +94,9 @@ pipeline {
       stage("Trivy image scanning"){
           steps{
             script{
-              def fileName = "${IMAGE_REPO_NAME}${IMAGE_TAG}.txt"
+              echo '<--------------- Docker Build Started --------------->'              
               sh "trivy image ${IMAGE_REPO_NAME}:${IMAGE_TAG} > ${filename}"
+              echo '<--------------- Docker Build Ends --------------->'
             }
             
           }
