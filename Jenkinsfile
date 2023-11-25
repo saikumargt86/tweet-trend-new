@@ -9,7 +9,7 @@ pipeline {
         string defaultValue: '857600833350', description: 'Enter your AWS account ID', name: 'AWS_ACCOUNT_ID'
         string defaultValue: 'ap-south-1', description: 'Enter your AWS account ID', name: 'AWS_DEFAULT_REGION'
         string defaultValue: 'ecr-repository-delete', description: 'Enter your AWS account ID', name: 'IMAGE_REPO_NAME'
-        string defaultValue: 'latest', description: 'Enter your AWS account ID', name: 'IMAGE_TAG'
+        string defaultValue: 'latest2', description: 'Enter your AWS account ID', name: 'IMAGE_TAG'
         }
     environment {
         PATH = "/opt/apache-maven-3.9.5/bin:$PATH"
