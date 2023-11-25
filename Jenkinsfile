@@ -113,6 +113,14 @@ pipeline {
             }
         }
 
+         stage ('Helm Deploy') {
+          steps {
+            script {
+                sh "helm upgrade release01 --install k8sdep --namespace helm-deployment --set image.tag=${IMAGE_TAG}"
+                }
+            }
+        }
+
       
      }
         post{
