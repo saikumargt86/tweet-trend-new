@@ -39,8 +39,10 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+initialDelaySeconds: 5
+
 service:
-  type: Loadbalancer
+  type: LoadBalancer
   port: 8080
 
 ingress:
