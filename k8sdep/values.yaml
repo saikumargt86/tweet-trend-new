@@ -43,7 +43,7 @@ initialDelaySeconds: 5
 
 service:
   type: LoadBalancer
-  port: 80
+  port: 8000
 
 ingress:
   enabled: false
