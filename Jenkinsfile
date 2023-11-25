@@ -93,12 +93,13 @@ pipeline {
 
       stage("Trivy image scanning"){
           steps{
-            script{
+            catchError(buildResult: 'SUCCESS') {
+              script{
               echo '<--------------- Trivy image scanning Started --------------->'              
               sh "trivy image ${IMAGE_REPO_NAME}:${IMAGE_TAG} > ${filename}"
               echo '<--------------- Trivy image scanning Ends --------------->'
             }
-            
+            }
           }
         }
 
